@@ -36,8 +36,11 @@ void web(int fd) {
 	}
 	len = strlen(buffer);
 	(void)sprintf(outbuffer,"HTTP/1.1 200 OK\nServer: tinyweb\nContent-Length: %ld\nConnection: close\nContent-Type: %s\n\n", len, "text/plain"); /* Header + a blank line */
+	// Write the header bits
 	(void)write(fd,outbuffer,strlen(outbuffer));
+	// Write the "GET /path" part stored in buffer
 	(void)write(fd,buffer,strlen(buffer));
+	printf("Sent: %s %s", outbuffer, buffer);
 	sleep(1);
 	close(fd);
 	return;
@@ -64,6 +67,8 @@ int main(int argc, char **argv) {
 	    length = sizeof(cli_addr);
 		if((socketfd = accept(listenfd, (struct sockaddr *)&cli_addr, &length)) < 0)
 		    exit(104);
+		printf("Listening and accepted! %d\n", socketfd);
+		fflush(stdout);
 		//close(listenfd);
 		web(socketfd);
 		close(socketfd);
