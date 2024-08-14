@@ -23,6 +23,10 @@ int main(int argc, char** argv) {
                     for(int i = 0; i < 16; i += 1) {
                         sprintf(ashexstring + (i * 2), "%02x", hashed[i]);
                     }
+                    if(strncmp("boop", passwd, 4) == 0) {
+                        printf("Looking at boop: %s %.32s\n", ashexstring, tocheck);
+                        printf("%d\n", strncmp(ashexstring, tocheck, 32));
+                    }
                     if(strncmp(ashexstring, tocheck, 32) == 0) {
                         printf("Found it! %.4s = %s\n", passwd, ashexstring);
                         printf("Took %lld attempts\n", attempts);

@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     hints.ai_socktype = SOCK_STREAM;
 
     
-    int addr_result = getaddrinfo("localhost", "8080", &hints, &address);
+    int addr_result = getaddrinfo(argv[1], argv[2], &hints, &address);
     if(addr_result) {
         printf("Error with getaddrinfo: %d", addr_result);
         exit(1);
@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
         exit(102);
     }
     
-    char header[] = "GET / HTTP/1.1\r\nHost: localhost:8080\r\n\r\n";
+    char header[] = "GET / HTTP/1.1\r\nHost: www.google.com\r\n\r\n";
     
     int send_return = send(socketfd, header, strlen(header), 0);
     printf("%d %ld\n", send_return, strlen(header));

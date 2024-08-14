@@ -12,5 +12,9 @@ int main(int argc, char** argv) {
         printf("%02x", hash[i]);
     }
     printf("\n");
+    for(int i = 0; i < 16; i += 1) {
+        printf("%d ", hash[i]);
+    }
+    printf("\n");
     printf("%ld %ld\n", sizeof(hash), sizeof(long long));
 }
